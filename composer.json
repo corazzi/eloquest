@@ -1,5 +1,5 @@
 {
-    "name": "sacha/eloquest",
+    "name": "sachiano/eloquest",
     "description": "Eloquest provides a simple way to query your Eloquent models based on request parameters",
     "type": "library",
     "require": {
