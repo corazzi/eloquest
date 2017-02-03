@@ -8,8 +8,6 @@ Add simple search from request queries to your models
 Use the `Sachiano\Eloquest\Eloquest` trait in your model and set up Eloquest search mappings
 
 ```php
-
-<?php 
 namespace Acme;
 
 use Illuminate\Database\Eloquent\Model;
@@ -39,4 +37,14 @@ class Client extends Model
 
 Get your results by using the `searchByRequest` scope, e.g.
 
-`$clients = Client::searchByRequest()->get()`
+```php
+$clients = Client::searchByRequest()->get();
+```
+
+// tofinish
+
+## Contributing
+// todo
+
+## License
+// todo
