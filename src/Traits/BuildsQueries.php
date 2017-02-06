@@ -3,6 +3,7 @@
 namespace Sachiano\Eloquest\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 trait BuildsQueries
 {
@@ -83,5 +84,27 @@ trait BuildsQueries
     public function whereDoesntHave($relation)
     {
         return $this->query->whereDoesntHave($relation);
+    }
+
+    /**
+     * A a ->where($foo, 'LIKE', $bar) clause with concatenating of fields
+     *
+     * @param $parameter
+     *
+     * @return mixed
+     */
+    public function whereLikeConcat($parameter)
+    {
+        return $this->query->whereRaw(
+          DB::raw(
+              sprintf(
+                  'CONCAT_WS(" ", %s) LIKE "%%%s%%"',
+                  collect($this->getOption('concat'))->map(function ($field) {
+                      return sprintf('COALESCE(%s, "")', $field);
+                  })->implode(', '),
+                  $parameter
+              )
+          )
+        );
     }
 }
