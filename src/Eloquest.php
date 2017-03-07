@@ -4,73 +4,41 @@ namespace Sachiano\Eloquest;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Sachiano\Eloquest\Exceptions\NoSearchMappings;
+use Sachiano\Eloquest\Exceptions\NoSearchProvider;
 
 trait Eloquest
 {
     /**
-     * The Eloquent Builder
+     * Use Eloquest to search based on the request input
      *
-     * @var Builder
+     * @param $query
+     *
+     * @return Builder
      */
-    private $eloquestQuery;
-
-    /**
-     * Set up the query
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSearchByRequest(Builder $query)
+    public function scopeSearchByRequest($query) : Builder
     {
-        $this->assertSearchable()->getSearchMappings()->each(function ($map, $field) use (&$query) {
-            $query = (new Clause(
-                $map,
-                $field,
-                request()->all()
-            ))->alterQuery($query);
-        });
+        $this->assertSearchable();
 
-        return $query;
+        $provider = $this->eloquestSearchProvider;
+
+        return (new $provider($query))->run();
     }
 
     /**
-     * Return the grammar method with an 'eloquest' prefix
-     *
-     * @param $grammar
-     *
-     * @return string
-     */
-    public function grammarMethod($grammar)
-    {
-        return sprintf('eloquest%s', $grammar);
-    }
-
-    /**
-     * Return a Collection of the model's search mappings
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getSearchMappings() : Collection
-    {
-        return collect($this->searchMappings);
-    }
-
-    /**
-     * Assert the model implementing Eloquest has a $searchMappings property
+     * Assert the model implementing Eloquest has an $eloquestSearchProvider property
      *
      * @return Model
      *
-     * @throws \Sachiano\Eloquest\Exceptions\NoSearchMappings
+     * @throws \Sachiano\Eloquest\Exceptions\NoSearchProvider
      */
     public function assertSearchable() : Model
     {
-        if (property_exists($this, 'searchMappings')) {
+        if (property_exists($this, 'eloquestSearchProvider')) {
             return $this;
         }
 
-        throw new NoSearchMappings('The model has no search mappings available');
+        throw new NoSearchProvider(
+            sprintf('%s does not have an Eloquest search provider', self::class)
+        );
     }
 }

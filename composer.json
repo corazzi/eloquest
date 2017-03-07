@@ -2,14 +2,6 @@
     "name": "sachiano/eloquest",
     "description": "Eloquest provides a simple way to query your Eloquent models based on request parameters",
     "type": "library",
-    "require": {
-        "illuminate/support": "^5.4"
-    },
-    "autoload": {
-      "psr-4": {
-          "Sachiano\\Eloquest\\": "src/"
-      }
-    },
     "license": "MIT",
     "authors": [
         {
@@ -17,5 +9,5 @@
             "email": "sacha.corazzi@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "require": {}
 }
