@@ -3,7 +3,7 @@ namespace Sachiano\Eloquest\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class EloquestSearchProvider
+class EloquestSearchResolver
 {
     /**
      * The current request
