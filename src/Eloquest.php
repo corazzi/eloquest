@@ -41,4 +41,25 @@ trait Eloquest
             sprintf('%s does not have an Eloquest search provider', self::class)
         );
     }
+
+    /**
+    * Format a string as a WHERE LIKE operator, %like this%, or %this, or this%
+    *
+    * @param string  $string
+    * @param string  $type
+    *
+    * @return string
+    */
+   public function formatLikeString(string $string, string $type = 'loose') : string
+   {
+       switch ($type) {
+           case 'left':
+               return sprintf('%%%s', $string);
+           case 'right':
+               return sprintf('%s%%', $string);
+           case 'loose':
+           default:
+               return sprintf('%%%s%%', $string);
+       }
+   }
 }
