@@ -4,7 +4,7 @@ namespace Sachiano\Eloquest\Exceptions;
 
 use Exception;
 
-class NoSearchProvider extends Exception
+class NoSearchResolver extends Exception
 {
     //
 }

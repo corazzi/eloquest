@@ -4,7 +4,7 @@ namespace Sachiano\Eloquest;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Sachiano\Eloquest\Exceptions\NoSearchProvider;
+use Sachiano\Eloquest\Exceptions\NoSearchResolver;
 
 trait Eloquest
 {
@@ -19,25 +19,25 @@ trait Eloquest
     {
         $this->assertSearchable();
 
-        $provider = $this->eloquestSearchProvider;
+        $provider = $this->eloquestSearchResolver;
 
         return (new $provider($query))->run();
     }
 
     /**
-     * Assert the model implementing Eloquest has an $eloquestSearchProvider property
+     * Assert the model implementing Eloquest has an $eloquestSearchResolver property
      *
      * @return Model
      *
-     * @throws \Sachiano\Eloquest\Exceptions\NoSearchProvider
+     * @throws \Sachiano\Eloquest\Exceptions\NoSearchResolver
      */
     public function assertSearchable() : Model
     {
-        if (property_exists($this, 'eloquestSearchProvider')) {
+        if (property_exists($this, 'eloquestSearchResolver')) {
             return $this;
         }
 
-        throw new NoSearchProvider(
+        throw new NoSearchResolver(
             sprintf('%s does not have an Eloquest search provider', self::class)
         );
     }
