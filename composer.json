@@ -4,8 +4,9 @@
     "type": "library",
     "license": "MIT",
     "autoload": {
-    "psr-4": {
-      "Sachiano\\Eloquest\\": "src/"
+        "psr-4": {
+          "Sachiano\\Eloquest\\": "src/"
+        }
     },
     "authors": [
         {
