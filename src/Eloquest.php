@@ -1,10 +1,10 @@
 <?php
 
-namespace Sachiano\Eloquest;
+namespace Corazzi\Eloquest;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Sachiano\Eloquest\Exceptions\NoSearchResolver;
+use Corazzi\Eloquest\Exceptions\NoSearchResolver;
 
 trait Eloquest
 {
@@ -29,7 +29,7 @@ trait Eloquest
      *
      * @return Model
      *
-     * @throws \Sachiano\Eloquest\Exceptions\NoSearchResolver
+     * @throws \Corazzi\Eloquest\Exceptions\NoSearchResolver
      */
     public function assertSearchable() : Model
     {

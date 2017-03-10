@@ -1,6 +1,6 @@
 <?php
 
-namespace Sachiano\Eloquest\Exceptions;
+namespace Corazzi\Eloquest\Exceptions;
 
 use Exception;
 

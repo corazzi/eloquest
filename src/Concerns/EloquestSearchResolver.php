@@ -1,5 +1,5 @@
 <?php
-namespace Sachiano\Eloquest\Concerns;
+namespace Corazzi\Eloquest\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 
