@@ -1,5 +1,5 @@
 {
-    "name": "sachiano/eloquest",
+    "name": "corazzi/eloquest",
     "description": "Eloquest provides a simple way to asbtract searching on Eloquent models based on request parameters",
     "type": "library",
     "license": "MIT",
