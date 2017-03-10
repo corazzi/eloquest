@@ -37,13 +37,36 @@ class EloquestSearchResolver
      */
     public function run() : Builder
     {
+        // Run the methods for query parameters that exist and are not empty
         collect($this->map)->each(function ($method, $arg) {
-            if (null !== $this->request->get($arg)) {
+            if (! empty($this->request->get($arg))) {
                 call_user_func([$this, $method]);
             }
         });
 
+
+        // Run any set up defaults for parameters that are empty
+        $this->setDefaults();
+
         return $this->builder;
+    }
+
+    /**
+     * Build the queries for any defaults if there's a default map
+     *
+     * @return EloquestSearchResolver
+     */
+    public function setDefaults() : EloquestSearchResolver
+    {
+        if (isset($this->defaults)) {
+            collect($this->defaults)->each(function ($method, $arg) {
+               if (empty($this->request->get($arg))) {
+                   call_user_func([$this, $method]);
+               }
+            });
+        }
+
+        return $this;
     }
 
     /**
